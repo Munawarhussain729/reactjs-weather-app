@@ -40,7 +40,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         const defaultLocation = ['Lahore', 'Karachi', 'Murree'];
-
+        
         const getDefaultData = async (location) => {
             try {
                 const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
@@ -120,9 +120,9 @@ const SearchPage = () => {
             </form>
 
             <div className=" flex flex-wrap items-center justify-center rounded w-500 shadow-xl m-10 p-5">
-                {
-                    defaultData?.map((CityData) => GetWeatherCard(CityData))
-                }
+                {defaultData?.map((CityData, index) => (
+                    <GetWeatherCard key={index} weatherDetails={CityData} />
+                ))}
             </div>
 
         </div>

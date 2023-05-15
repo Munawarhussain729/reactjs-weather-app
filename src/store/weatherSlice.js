@@ -12,7 +12,10 @@ export const weatherSlice = createSlice({
                 return weather.Location === action.payload.Location;
             });
             if (!existingJson) {
-                state.weatherHistory.push(action.payload);
+                let updatedList = []
+                updatedList.push(action.payload)
+                state.weatherHistory.forEach((item)=>updatedList.push(item))
+                state.weatherHistory = updatedList;
             }
         }
     }

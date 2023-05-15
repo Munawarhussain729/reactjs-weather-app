@@ -1,9 +1,10 @@
 
-export const WeatherObjectCon = (location, temperature, cloudy, wind, Humidity, pressure) => {
-    
+export const WeatherObjectCon = (location, temperature, cloudy, wind, Humidity, pressure, Date) => {
+
     return {
         'Location': location,
-        'Temperature': (temperature -273.15).toFixed(2),
+        'ForcastDate': Date,
+        'Temperature': (temperature - 273.15).toFixed(2),
         'Cloudy': cloudy,
         'Wind': wind,
         'Humaidity': Humidity,

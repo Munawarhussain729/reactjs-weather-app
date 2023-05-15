@@ -9,10 +9,11 @@ module.exports = {
       xl: '1440px',
     },
     colors: {
-      'white':'#FFFFFF',
+      'white': '#FFFFFF',
       'blue': '#1fb6ff',
       'purple': '#7e5bef',
       'pink': '#ff49db',
+      'red': '#FF0000',
       'orange': '#ff7849',
       'green': '#13ce66',
       'yellow': '#ffc82c',
@@ -24,7 +25,7 @@ module.exports = {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
-  
+
   },
   plugins: [],
 } 
