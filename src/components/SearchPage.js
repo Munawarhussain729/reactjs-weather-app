@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react'
 import cloudy from "./../assets/Cloudy.jpg"
 import axios from 'axios'
 import { WeatherObjectCon } from './WeatherObjectCon'
-import Loader from './Loader'
-import { insertCity } from '../store/weatherSlice'
+import { insertCity, deleteCity } from '../store/weatherSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 
 const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
 
-const GetWeatherCard = (weatherDetails) => {
+const GetWeatherCard = ({ weatherDetails }) => {
+    const dispatch = useDispatch();
+
+    const handleDelete = (e) => {
+        e.preventDefault()
+        dispatch(deleteCity(weatherDetails))
+    }
     return (
         <div className=" rounded w-500 shadow-xl m-10 p-5 border">
             <div className='text-center p-5 m-5 mt-10 '>
@@ -26,6 +31,7 @@ const GetWeatherCard = (weatherDetails) => {
                         <p><span className='text-lg font-semibold'>Pressure:</span> {weatherDetails?.Pressure}</p>
                     </div>
                 </div>
+                <button className='border p-3' onClick={(e)=>handleDelete(e)}>Delete Card</button>
             </div>
         </div>
     )
@@ -38,9 +44,10 @@ const SearchPage = () => {
 
     const defaultData = useSelector((state) => state.weather.weatherHistory);
 
+
     useEffect(() => {
         const defaultLocation = ['Lahore', 'Karachi', 'Murree'];
-        
+
         const getDefaultData = async (location) => {
             try {
                 const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
@@ -68,7 +75,6 @@ const SearchPage = () => {
         };
         const fetchData = async () => {
             for (let i = 0; i < defaultLocation.length; i++) {
-                console.log("called");
                 await getDefaultData(defaultLocation[i]);
             }
         };
@@ -120,9 +126,10 @@ const SearchPage = () => {
             </form>
 
             <div className=" flex flex-wrap items-center justify-center rounded w-500 shadow-xl m-10 p-5">
-                {defaultData?.map((CityData, index) => (
-                    <GetWeatherCard key={index} weatherDetails={CityData} />
-                ))}
+                {defaultData?.map((CityData, index) => {
+
+                    return < GetWeatherCard key={index} weatherDetails={CityData} />
+                })}
             </div>
 
         </div>

@@ -14,15 +14,24 @@ export const weatherSlice = createSlice({
             if (!existingJson) {
                 let updatedList = []
                 updatedList.push(action.payload)
-                state.weatherHistory.forEach((item)=>updatedList.push(item))
+                state.weatherHistory.forEach((item) => updatedList.push(item))
                 state.weatherHistory = updatedList;
             }
+        },
+        deleteCity: (state, action) => {
+            
+            state.weatherHistory = state.weatherHistory.filter(
+                (weather) => weather.Location !== action.payload.Location
+            );
+
+            console.log("New ", state.weatherHistory)
         }
+
     }
 })
 
 
 // Action creators are generated for each case reducer function
-export const { insertCity } = weatherSlice.actions
+export const { insertCity, deleteCity } = weatherSlice.actions
 
 export default weatherSlice.reducer
