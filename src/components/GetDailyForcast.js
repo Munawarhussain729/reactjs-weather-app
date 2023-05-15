@@ -1,38 +1,30 @@
-import React from 'react'
+import React from 'react';
 
 const GetForcastRow = (item) => {
-    const dateString = item.ForcastDate;
+    const dateString = item.item.ForcastDate;
     const timeString = dateString.split(" ")[1];
     const hourMinute = timeString.split(":").slice(0, 2).join(":");
-
-    return (<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {hourMinute}
-        </th>
-        <td className="px-6 py-4">
-            {item.Temperature}
-        </td>
-        <td className="px-6 py-4">
-            {item.Cloudy}
-        </td>
-        <td className="px-6 py-4">
-            {item.Wind}
-        </td>
-        <td className="px-6 py-4">
-            {item.Humaidity}
-        </td>
-        <td className="px-6 py-4">
-            {item.Pressure}
-        </td>
-    </tr>)
-}
-
-const GetDailyForcast = ({ item }) => {
-    const date = new Date(item.ForcastDate);
-    const formattedDate = date.toDateString();
+    console.log("Items ", item)
     return (
-        <div className="relative overflow-x-auto">
-            <h1>Forcast For {formattedDate} </h1>
+        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+                {hourMinute}
+            </th>
+            <td className="px-6 py-4">{item.item.Temperature}</td>
+            <td className="px-6 py-4">{item.item.Cloudy}</td>
+            <td className="px-6 py-4">{item.item.Wind}</td>
+            <td className="px-6 py-4">{item.item.Humaidity}</td>
+            <td className="px-6 py-4">{item.item.Pressure}</td>
+        </tr>
+    );
+};
+
+const GetDailyForcast = ({ items }) => {
+    return (
+        <div className="relative overflow-x-auto rounded w-500 shadow-xl m-10 p-5 border bg-gradient-to-r from-cyan to-gray">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -57,12 +49,13 @@ const GetDailyForcast = ({ item }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {GetForcastRow(item)}
+                    {items.map((item) => (
+                        <GetForcastRow key={item.id} item={item} />
+                    ))}
                 </tbody>
             </table>
         </div>
-    )
-}
+    );
+};
 
-
-export default GetDailyForcast
+export default GetDailyForcast;

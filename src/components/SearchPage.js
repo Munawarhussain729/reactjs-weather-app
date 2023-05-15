@@ -16,7 +16,7 @@ const GetWeatherCard = ({ weatherDetails }) => {
         dispatch(deleteCity(weatherDetails))
     }
     return (
-        <div className=" rounded w-500 shadow-xl m-10 p-5 border">
+        <div className=" rounded w-max bg-gradient-to-r from-cyan to-gray shadow-xl m-10 p-5 ">
             <div className='text-center p-5 m-5 mt-10 '>
                 <h1> <span className='text-lg font-semibold'>Location:</span> {weatherDetails?.Location}</ h1>
                 <div className='flex justify-between h-250 items-center '>
@@ -24,7 +24,7 @@ const GetWeatherCard = ({ weatherDetails }) => {
                         <img src={cloudy} alt='Cloudy not found' className='w-40 h-40 rounded-full' />
                         <h3> <span className='text-lg font-semibold'>Cloudy:</span> {weatherDetails?.Cloudy}</h3>
                     </div>
-                    <h3> <span className='text-lg font-semibold'>Temperature:</span> {weatherDetails?.Temperature} C</h3>
+                    <h3 className='m-5'> <span className='text-lg font-semibold'>Temperature:</span> {weatherDetails?.Temperature} C</h3>
                     <div>
                         <p> <span className='text-lg font-semibold'>Wind:</span> {weatherDetails?.Wind}</p>
                         <p><span className='text-lg font-semibold'>Humidity:</span> {weatherDetails?.Humaidity} </p>
@@ -111,16 +111,16 @@ const SearchPage = () => {
 
 
     return (
-        <div className=" rounded w-500 shadow-xl m-10 p-5 border">
+        <div className=" rounded bg-gray text-white w-500 shadow-xl  p-10 m-0 border">
             <form className="flex items-center ">
                 <label className="sr-only">Search</label>
                 <div className="relative w-full">
-                    <input type="text" id="voice-search" className=" border  text-lg rounded-lg focus:ring-blue-500
+                    <input type="text" id="voice-search" className=" bg-cyan  text-black placeholder-black text-lg rounded-lg focus:ring-blue-500
                              focus:border-blue-500 block w-full pl-10 p-2.5"
                         placeholder="Search a city." required value={location} onChange={(e) => { setlocation(e.target.value) }} />
                 </div>
-                <button type="submit" className="inline-flex items-center py-2 px-3 ml-2 text-sm font-medium text-black
-                         rounded-lg border hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue-300" onClick={(e) => handleSearch(e)}>
+                <button type="submit" className="inline-flex items-center text-lg py-2.5 px-3 ml-2 font-medium text-gray bg-cyan
+                            rounded-lg  hover:bg-blue focus:ring-4 focus:outline-none focus:ring-blue-300" onClick={(e) => handleSearch(e)}>
                     Search
                 </button>
             </form>
