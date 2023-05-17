@@ -7,7 +7,7 @@ import { insertCity } from '../store/weatherSlice'
 import { useDispatch } from 'react-redux'
 
 
-const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
+const WEATHER_API_KEY = 'paste_your_api_key'
 
 const Home = () => {
     const [location, setlocation] = useState('')

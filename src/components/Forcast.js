@@ -4,7 +4,7 @@ import { WeatherObjectCon } from './WeatherObjectCon'
 import CompleteForcast from './CompleteForcast'
 import Loader from './Loader'
 
-const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
+const WEATHER_API_KEY = 'paste_your_weather_key'
 
 const Forcast = () => {
   const [location, setlocation] = useState('')
