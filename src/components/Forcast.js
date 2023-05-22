@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { WeatherObjectCon } from './WeatherObjectCon'
 import CompleteForcast from './CompleteForcast'
 import Loader from './Loader'
@@ -28,7 +28,6 @@ const Forcast = () => {
         const Location = response.data.city.name;
         const ForcastObject = [];
         ForcastList?.forEach(element => {
-          console.log("Elements ", element);
           ForcastObject.push(
             WeatherObjectCon({
               location: Location,
@@ -41,12 +40,12 @@ const Forcast = () => {
             })
           )
         });
-        console.log("Forcase Details ", ForcastObject);
         setForcastDetail(ForcastObject)
         setShowLoader(false)
       }
     } catch (error) {
-      console.error(error);
+      alert(error.response?.data?.message)
+      setShowLoader(false)
       // Handle errors
     }
   }

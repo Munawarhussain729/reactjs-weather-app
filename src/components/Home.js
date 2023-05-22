@@ -3,8 +3,8 @@ import cloudy from "./../assets/Cloudy.jpg"
 import axios from 'axios'
 import { WeatherObjectCon } from './WeatherObjectCon'
 import Loader from './Loader'
-import { insertCity } from '../store/weatherSlice'
-import { useDispatch } from 'react-redux'
+// import { insertCity } from '../store/weatherSlice'
+// import { useDispatch } from 'react-redux'
 
 
 const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
@@ -14,7 +14,7 @@ const Home = () => {
     const [weatherDetails, setWeatherDetails] = useState({})
     const [showLoader, setShowLoader] = useState(true)
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const getWeatherOnLocation = async (longitude, latitude) => {
         try {
@@ -87,7 +87,8 @@ const Home = () => {
                 setShowLoader(true)
             }
         } catch (error) {
-            console.error(error);
+            alert(error.response?.data?.message)
+            setShowLoader(true)
             // Handle errors
         }
     }

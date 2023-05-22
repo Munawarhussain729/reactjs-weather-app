@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import cloudy from "./../assets/Cloudy.jpg"
 import axios from 'axios'
 import { WeatherObjectCon } from './WeatherObjectCon'
-import { insertCity, deleteCity } from '../store/weatherSlice'
-import { useDispatch, useSelector } from 'react-redux'
+// import { insertCity, deleteCity } from '../store/weatherSlice'
+// import { useDispatch, useSelector } from 'react-redux'
 
 
 const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
 
-const GetWeatherCard = ({ weatherDetails }) => {
-    const dispatch = useDispatch();
+const GetWeatherCard = ({ weatherDetails, setCitiesWeather }) => {
+    // const dispatch = useDispatch();
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -24,7 +24,8 @@ const GetWeatherCard = ({ weatherDetails }) => {
             }
         }
         localStorage.setItem('citiesWeather', JSON.stringify(cities));
-        window.location.reload()
+        // window.location.reload()
+        setCitiesWeather(cities)
         // dispatch(deleteCity(weatherDetails))
     }
     return (
@@ -52,7 +53,7 @@ const SearchPage = () => {
 
     const [location, setlocation] = useState('');
     const [weatherDetails, setWeatherDetails] = useState({});
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [citiesWeather, setCitiesWeather] = useState([]);
     // const defaultData = useSelector((state) => state.weather.weatherHistory);
 
@@ -141,7 +142,7 @@ const SearchPage = () => {
 
             }
         } catch (error) {
-            console.error(error);
+            alert(error.response?.data?.message)
         }
     };
 
@@ -164,7 +165,7 @@ const SearchPage = () => {
             <div className=" flex flex-wrap items-center justify-center rounded w-500 shadow-xl m-10 p-5">
                 {citiesWeather?.map((CityData, index) => {
 
-                    return < GetWeatherCard key={index} weatherDetails={CityData} />
+                    return < GetWeatherCard key={index} weatherDetails={CityData} setCitiesWeather={setCitiesWeather} />
                 })}
             </div>
 
