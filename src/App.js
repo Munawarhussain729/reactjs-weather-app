@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 
-const WEATHER_API_KEY = 'Paste_Your_weather_key'
+const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
 
 
 function App() {

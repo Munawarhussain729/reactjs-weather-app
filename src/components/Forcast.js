@@ -4,7 +4,7 @@ import { WeatherObjectCon } from './WeatherObjectCon'
 import CompleteForcast from './CompleteForcast'
 import Loader from './Loader'
 
-const WEATHER_API_KEY = 'paste_your_weather_key'
+const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
 
 const Forcast = () => {
   const [location, setlocation] = useState('')
@@ -25,11 +25,23 @@ const Forcast = () => {
       });
       if (response.data) {
         const ForcastList = response.data.list;
-
+        const Location = response.data.city.name;
         const ForcastObject = [];
         ForcastList?.forEach(element => {
-          ForcastObject.push(WeatherObjectCon(location, element.main.temp, element.main.pressure, element.main.humidity, element.wind.speed, element.clouds.all, element.dt_txt))
+          console.log("Elements ", element);
+          ForcastObject.push(
+            WeatherObjectCon({
+              location: Location,
+              temperature: element.main.temp,
+              cloudy: element.weather[0]?.description,
+              wind: element.wind.deg,
+              date: element.dt_txt,
+              humidity: element.main.humidity,
+              pressure: element.main.pressure
+            })
+          )
         });
+        console.log("Forcase Details ", ForcastObject);
         setForcastDetail(ForcastObject)
         setShowLoader(false)
       }
