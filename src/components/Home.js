@@ -3,8 +3,8 @@ import cloudy from "./../assets/Cloudy.jpg"
 import axios from 'axios'
 import { WeatherObjectCon } from './WeatherObjectCon'
 import Loader from './Loader'
-import { insertCity } from '../store/weatherSlice'
-import { useDispatch } from 'react-redux'
+// import { insertCity } from '../store/weatherSlice'
+// import { useDispatch } from 'react-redux'
 
 
 const WEATHER_API_KEY = 'f31dc2b8b49a27efda7c2d44d41aa637'
@@ -14,7 +14,7 @@ const Home = () => {
     const [weatherDetails, setWeatherDetails] = useState({})
     const [showLoader, setShowLoader] = useState(true)
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const getWeatherOnLocation = async (longitude, latitude) => {
         try {
@@ -27,9 +27,16 @@ const Home = () => {
             });
 
             if (response.data) {
-                const weatherObject = WeatherObjectCon(response.data.name, response.data.main.temp, response.data.main.pressure, response.data.main.humidity, response.data.wind.speed, response.data.clouds.all)
+                const weatherObject = WeatherObjectCon({
+                    location: response.data.name,
+                    temperature: response.data.main.temp,
+                    cloudy: response.data?.weather[0]?.description,
+                    wind: response.data.wind.deg,
+                    humidity: response.data.main.humidity,
+                    pressure: response.data.main.pressure
+                });
                 setWeatherDetails(weatherObject)
-                dispatch(insertCity(weatherObject))
+                // dispatch(insertCity(weatherObject))
                 setShowLoader(true)
             }
         } catch (error) {
@@ -43,7 +50,6 @@ const Home = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    console.log("Location : ", position.coords)
                     getWeatherOnLocation(position.coords.longitude, position.coords.latitude);
                 },
                 (error) => {
@@ -68,13 +74,21 @@ const Home = () => {
             });
 
             if (response.data) {
-                const weatherObject = WeatherObjectCon(response.data.name, response.data.main.temp, response.data.main.pressure, response.data.main.humidity, response.data.wind.speed, response.data.clouds.all)
+                const weatherObject = WeatherObjectCon({
+                    location: response.data.name,
+                    temperature: response.data.main.temp,
+                    cloudy: response.data?.weather[0]?.description,
+                    wind: response.data.wind.deg,
+                    humidity: response.data.main.humidity,
+                    pressure: response.data.main.pressure
+                });
                 setWeatherDetails(weatherObject)
-                dispatch(insertCity(weatherObject))
+                // dispatch(insertCity(weatherObject))
                 setShowLoader(true)
             }
         } catch (error) {
-            console.error(error);
+            alert(error.response?.data?.message)
+            setShowLoader(true)
             // Handle errors
         }
     }
@@ -108,7 +122,7 @@ const Home = () => {
                         <h3> <span className='text-lg font-semibold'>Temperature:</span> {weatherDetails?.Temperature} C</h3>
                         <div>
                             <p> <span className='text-lg font-semibold'>Wind:</span> {weatherDetails?.Wind}</p>
-                            <p><span className='text-lg font-semibold'>Humidity:</span> {weatherDetails?.Humaidity} </p>
+                            <p><span className='text-lg font-semibold'>Humidity:</span> {weatherDetails?.Humidity} </p>
                             <p><span className='text-lg font-semibold'>Pressure:</span> {weatherDetails?.Pressure}</p>
                         </div>
                     </div>

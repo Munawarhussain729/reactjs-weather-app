@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { WeatherObjectCon } from './WeatherObjectCon'
 import CompleteForcast from './CompleteForcast'
 import Loader from './Loader'
@@ -25,16 +25,27 @@ const Forcast = () => {
       });
       if (response.data) {
         const ForcastList = response.data.list;
-
+        const Location = response.data.city.name;
         const ForcastObject = [];
         ForcastList?.forEach(element => {
-          ForcastObject.push(WeatherObjectCon(location, element.main.temp, element.main.pressure, element.main.humidity, element.wind.speed, element.clouds.all, element.dt_txt))
+          ForcastObject.push(
+            WeatherObjectCon({
+              location: Location,
+              temperature: element.main.temp,
+              cloudy: element.weather[0]?.description,
+              wind: element.wind.deg,
+              date: element.dt_txt,
+              humidity: element.main.humidity,
+              pressure: element.main.pressure
+            })
+          )
         });
         setForcastDetail(ForcastObject)
         setShowLoader(false)
       }
     } catch (error) {
-      console.error(error);
+      alert(error.response?.data?.message)
+      setShowLoader(false)
       // Handle errors
     }
   }

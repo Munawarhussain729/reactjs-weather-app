@@ -1,10 +1,9 @@
 import React from 'react';
 
 const GetForcastRow = (item) => {
-    const dateString = item.item.ForcastDate;
-    const timeString = dateString.split(" ")[1];
-    const hourMinute = timeString.split(":").slice(0, 2).join(":");
-    console.log("Items ", item)
+    const date = new Date(item.item.ForcastDate);
+    const hourMinute = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <th
@@ -16,7 +15,7 @@ const GetForcastRow = (item) => {
             <td className="px-6 py-4">{item.item.Temperature}</td>
             <td className="px-6 py-4">{item.item.Cloudy}</td>
             <td className="px-6 py-4">{item.item.Wind}</td>
-            <td className="px-6 py-4">{item.item.Humaidity}</td>
+            <td className="px-6 py-4">{item.item.Humidity}</td>
             <td className="px-6 py-4">{item.item.Pressure}</td>
         </tr>
     );
@@ -41,7 +40,7 @@ const GetDailyForcast = ({ items }) => {
                             Wind
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Humaidity
+                            Humidity
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Pressure
@@ -50,7 +49,7 @@ const GetDailyForcast = ({ items }) => {
                 </thead>
                 <tbody>
                     {items.map((item) => (
-                        <GetForcastRow key={item.id} item={item} />
+                        <GetForcastRow key={JSON.stringify(item)} item={item} />
                     ))}
                 </tbody>
             </table>

@@ -24,7 +24,6 @@ export const weatherSlice = createSlice({
                 (weather) => weather.Location !== action.payload.Location
             );
 
-            console.log("New ", state.weatherHistory)
         }
 
     }

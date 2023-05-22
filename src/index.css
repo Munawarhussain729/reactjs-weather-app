@@ -1,22 +1,16 @@
-<<<<<<< HEAD
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-=======
->>>>>>> Initialize project using Create React App
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-<<<<<<< HEAD
   background-image: url('./assets/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-=======
->>>>>>> Initialize project using Create React App
   -moz-osx-font-smoothing: grayscale;
 }
 
